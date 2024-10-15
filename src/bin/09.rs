@@ -39,18 +39,18 @@ pub fn part_two(input: &str) -> Option<u64> {
         }
     }
     let num = num.unwrap();
-    'outer: for start in 0..list.len() {
-        for end in start + 1..list.len() {
-            match list[start..end].iter().sum::<u64>().cmp(&num) {
-                Ordering::Less => {}
+    for start in 0..list.len() {
+        let mut sum = 0;
+        for (len, next) in list[start..].iter().enumerate() {
+            sum += next;
+            match sum.cmp(&num) {
                 Ordering::Equal => {
-                    let min = list[start..end].iter().min().unwrap();
-                    let max = list[start..end].iter().max().unwrap();
+                    let min = list[start..start + len + 1].iter().min().unwrap();
+                    let max = list[start..start + len + 1].iter().max().unwrap();
                     return Some(min + max);
                 }
-                Ordering::Greater => {
-                    continue 'outer;
-                }
+                Ordering::Greater => break,
+                Ordering::Less => {}
             }
         }
     }
