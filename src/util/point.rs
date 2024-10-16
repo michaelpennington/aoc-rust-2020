@@ -190,14 +190,20 @@ impl<T> Pt<T> {
             Dir::W => self.x.checked_sub(&T::one()).map(|x| Self { x, y: self.y }),
         }
     }
-}
 
-impl<T> Pt<T> {
     pub fn neighbors(self) -> impl Iterator<Item = Pt<T>>
     where
         T: CheckedAdd + CheckedSub + Num + Copy,
     {
         Dir::iter().filter_map(move |d| self.checked_add_dir(d))
+    }
+}
+
+impl Pt<usize> {
+    pub fn checked_add_signed(&self, other: &Pt<isize>) -> Option<Self> {
+        self.x
+            .checked_add_signed(other.x)
+            .and_then(|x| self.y.checked_add_signed(other.y).map(|y| Pt { x, y }))
     }
 }
 

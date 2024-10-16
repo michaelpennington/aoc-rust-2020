@@ -1,4 +1,4 @@
-use std::{cmp::Ordering, collections::HashMap};
+use std::collections::HashMap;
 
 advent_of_code::solution!(10);
 
@@ -56,42 +56,32 @@ impl ChargerList {
                     }
                 }
                 (Some(v1), Some(v2), Some(v3)) => {
+                    use std::cmp::Ordering::*;
                     match (
                         (current + 3).cmp(v1),
                         (current + 3).cmp(v2),
                         (current + 3).cmp(v3),
                     ) {
-                        (Ordering::Greater, Ordering::Less, Ordering::Equal)
-                        | (Ordering::Greater, Ordering::Less, Ordering::Greater)
-                        | (Ordering::Greater, Ordering::Equal, Ordering::Equal)
-                        | (Ordering::Greater, Ordering::Equal, Ordering::Greater)
-                        | (Ordering::Greater, Ordering::Greater, Ordering::Greater)
-                        | (Ordering::Equal, Ordering::Less, Ordering::Equal)
-                        | (Ordering::Equal, Ordering::Less, Ordering::Greater)
-                        | (Ordering::Equal, Ordering::Equal, Ordering::Less)
-                        | (Ordering::Equal, Ordering::Equal, Ordering::Equal)
-                        | (Ordering::Equal, Ordering::Equal, Ordering::Greater)
-                        | (Ordering::Equal, Ordering::Greater, Ordering::Less)
-                        | (Ordering::Equal, Ordering::Greater, Ordering::Equal)
-                        | (Ordering::Equal, Ordering::Greater, Ordering::Greater)
-                        | (Ordering::Less, _, _) => unreachable!(),
+                        (Greater, Less | Equal, Equal)
+                        | (Equal, Less, Equal | Greater)
+                        | (Equal, Equal | Greater, _)
+                        | (_, _, Greater)
+                        | (Less, _, _) => unreachable!(),
 
-                        (Ordering::Greater, Ordering::Less, Ordering::Less)
-                        | (Ordering::Equal, Ordering::Less, Ordering::Less) => {
+                        (Greater | Equal, Less, Less) => {
                             let ans = self.num_ways_here_to_end(index + 1);
                             self.cache.insert(index, ans);
                             ans
                         }
 
-                        (Ordering::Greater, Ordering::Greater, Ordering::Less)
-                        | (Ordering::Greater, Ordering::Equal, Ordering::Less) => {
+                        (Greater, Greater | Equal, Less) => {
                             let ans = self.num_ways_here_to_end(index + 1)
                                 + self.num_ways_here_to_end(index + 2);
                             self.cache.insert(index, ans);
                             ans
                         }
 
-                        (Ordering::Greater, Ordering::Greater, Ordering::Equal) => {
+                        (Greater, Greater, Equal) => {
                             let ans = self.num_ways_here_to_end(index + 1)
                                 + self.num_ways_here_to_end(index + 2)
                                 + self.num_ways_here_to_end(index + 3);
