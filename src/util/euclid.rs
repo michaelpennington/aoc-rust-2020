@@ -1,4 +1,4 @@
-use std::ops::{ShrAssign, Sub};
+use std::ops::{AddAssign, ShrAssign, Sub};
 
 use num::traits::{Euclid, Num, Signed};
 
@@ -26,6 +26,51 @@ where
         a = t;
     }
     a
+}
+
+pub fn egcd<T>(mut a: T, mut b: T) -> (T, T, T)
+where
+    T: Num + Copy,
+{
+    let one = T::one();
+    let zero = T::zero();
+    let (mut sa, mut ta, mut sb, mut tb) = (one, zero, zero, one);
+    while b != zero {
+        let (q, r) = (a / b, a % b);
+        (sa, ta, sb, tb) = (sb, tb, sa - q * sb, ta - q * tb);
+        (a, b) = (b, r);
+    }
+    (a, sa, ta)
+}
+
+pub fn sgcd<T>(x: T, y: T) -> T
+where
+    T: Num + Copy,
+{
+    if y == T::zero() {
+        x
+    } else {
+        sgcd(y, x % y)
+    }
+}
+
+pub fn crt<T>(a: &[T], m: &[T]) -> Option<T>
+where
+    T: Num + Copy + Euclid + AddAssign,
+{
+    use std::iter::zip;
+    let one = T::one();
+    let zero = T::zero();
+    let (mut x, mut m_prod) = (zero, one);
+    for (&ai, &mi) in zip(a, m) {
+        let (g, s, _) = egcd(m_prod, mi);
+        if (ai - x).rem_euclid(&g) != zero {
+            return None;
+        }
+        x += m_prod * ((s * ((ai - x).rem_euclid(&mi))).div_euclid(&g));
+        m_prod = (m_prod * mi).div_euclid(&sgcd(m_prod, mi));
+    }
+    Some(x.rem_euclid(&m_prod))
 }
 
 pub fn mod_inverse<T>(a: T, n: T) -> T
