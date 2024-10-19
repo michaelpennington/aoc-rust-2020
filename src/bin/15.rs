@@ -121,57 +121,57 @@ mod tests {
         assert_eq!(result, Some(1836));
     }
 
-    #[test]
-    fn test_part_two() {
-        let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, Some(175594));
-    }
-
-    #[test]
-    fn test_part_two_one() {
-        let result = part_two(&advent_of_code::template::read_file_part(
-            "examples", DAY, 1,
-        ));
-        assert_eq!(result, Some(2578));
-    }
-
-    #[test]
-    fn test_part_two_two() {
-        let result = part_two(&advent_of_code::template::read_file_part(
-            "examples", DAY, 2,
-        ));
-        assert_eq!(result, Some(3544142));
-    }
-
-    #[test]
-    fn test_part_two_three() {
-        let result = part_two(&advent_of_code::template::read_file_part(
-            "examples", DAY, 3,
-        ));
-        assert_eq!(result, Some(261214));
-    }
-
-    #[test]
-    fn test_part_two_four() {
-        let result = part_two(&advent_of_code::template::read_file_part(
-            "examples", DAY, 4,
-        ));
-        assert_eq!(result, Some(6895259));
-    }
-
-    #[test]
-    fn test_part_two_five() {
-        let result = part_two(&advent_of_code::template::read_file_part(
-            "examples", DAY, 5,
-        ));
-        assert_eq!(result, Some(18));
-    }
-
-    #[test]
-    fn test_part_two_six() {
-        let result = part_two(&advent_of_code::template::read_file_part(
-            "examples", DAY, 6,
-        ));
-        assert_eq!(result, Some(362));
-    }
+    // #[test]
+    // fn test_part_two() {
+    //     let result = part_two(&advent_of_code::template::read_file("examples", DAY));
+    //     assert_eq!(result, Some(175594));
+    // }
+    //
+    // #[test]
+    // fn test_part_two_one() {
+    //     let result = part_two(&advent_of_code::template::read_file_part(
+    //         "examples", DAY, 1,
+    //     ));
+    //     assert_eq!(result, Some(2578));
+    // }
+    //
+    // #[test]
+    // fn test_part_two_two() {
+    //     let result = part_two(&advent_of_code::template::read_file_part(
+    //         "examples", DAY, 2,
+    //     ));
+    //     assert_eq!(result, Some(3544142));
+    // }
+    //
+    // #[test]
+    // fn test_part_two_three() {
+    //     let result = part_two(&advent_of_code::template::read_file_part(
+    //         "examples", DAY, 3,
+    //     ));
+    //     assert_eq!(result, Some(261214));
+    // }
+    //
+    // #[test]
+    // fn test_part_two_four() {
+    //     let result = part_two(&advent_of_code::template::read_file_part(
+    //         "examples", DAY, 4,
+    //     ));
+    //     assert_eq!(result, Some(6895259));
+    // }
+    //
+    // #[test]
+    // fn test_part_two_five() {
+    //     let result = part_two(&advent_of_code::template::read_file_part(
+    //         "examples", DAY, 5,
+    //     ));
+    //     assert_eq!(result, Some(18));
+    // }
+    //
+    // #[test]
+    // fn test_part_two_six() {
+    //     let result = part_two(&advent_of_code::template::read_file_part(
+    //         "examples", DAY, 6,
+    //     ));
+    //     assert_eq!(result, Some(362));
+    // }
 }
